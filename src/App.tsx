@@ -1,21 +1,72 @@
-import { Button } from "@/components/ui/button"
+import { createBrowserRouter, redirect, RouterProvider } from "react-router"
+
+import Login from "./pages/login"
+import AppLayout from "./ui/app-layout"
+import Dashboard from "./pages/dashboard"
+import Rooms from "./pages/rooms"
+import { getUserData } from "./lib/auth-api"
+import GlobalError from "./ui/global-error"
+import { loginAction } from "./components/login-form"
+import Reservations from "./pages/reservations"
+import Housekeeping from "./pages/house-keeping"
+import Settings from "./pages/settings"
+
+export async function requiresAuth() {
+  const isAuthenticated = await getUserData()
+  if (!isAuthenticated) throw redirect("/login")
+  return null
+}
+
+export async function redirectIfAuth() {
+  const isAuthenticated = await getUserData()
+  if (isAuthenticated) throw redirect("/dashboard")
+  return null
+}
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: AppLayout,
+    loader: requiresAuth,
+    errorElement: <GlobalError />,
+    children: [
+      {
+        index: true,
+        loader: () => redirect("dashboard"),
+      },
+      {
+        path: "dashboard",
+        Component: Dashboard,
+      },
+      {
+        path: "rooms",
+        Component: Rooms,
+      },
+      {
+        path: "reservations",
+        Component: Reservations,
+      },
+      {
+        path: "house-keeping",
+        Component: Housekeeping,
+      },
+      {
+        path: "settings",
+        Component: Settings,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    Component: Login,
+    errorElement: <GlobalError />,
+    loader: redirectIfAuth,
+    action: loginAction,
+  },
+])
 
 export function App() {
-  return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
-      </div>
-    </div>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App
