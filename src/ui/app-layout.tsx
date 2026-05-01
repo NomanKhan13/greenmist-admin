@@ -3,6 +3,7 @@ import { AppSidebar } from "@/components/app-sidebar"
 import { SiteHeader } from "@/components/site-header"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import LoadingScreen from "./loading-screen"
+import { Toaster } from "sonner"
 
 export default function AppLayout() {
   const navigation = useNavigation()
@@ -10,6 +11,7 @@ export default function AppLayout() {
 
   return (
     <SidebarProvider
+      className="selection:bg-emerald-300 selection:text-emerald-900"
       style={
         {
           "--sidebar-width": "calc(var(--spacing) * 72)",
@@ -21,6 +23,14 @@ export default function AppLayout() {
       <SidebarInset className="relative">
         <SiteHeader />
         <Outlet />
+        <Toaster
+          toastOptions={{
+            classNames: {
+              toast: "bg-card",
+              description: "text-card-foreground",
+            },
+          }}
+        />
         {isLoading && <LoadingScreen />}
       </SidebarInset>
     </SidebarProvider>

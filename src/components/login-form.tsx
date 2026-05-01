@@ -25,6 +25,7 @@ export function LoginForm({
   const actionData = useActionData()
   const navigation = useNavigation()
   const isSubmitting = navigation.state === "submitting"
+  console.log(actionData?.error)
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -71,11 +72,14 @@ export function LoginForm({
           </Form>
         </CardContent>
       </Card>
-      {actionData?.login && (
-        <div className="rounded-md border border-destructive/20 bg-destructive/10 p-3 text-sm text-destructive">
-          {actionData.login}
-        </div>
-      )}
+
+      <div className="h-16">
+        {actionData?.error && (
+          <div className="h-16 rounded-md border border-destructive/20 bg-destructive/10 p-3 text-sm text-destructive">
+            {actionData.error}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

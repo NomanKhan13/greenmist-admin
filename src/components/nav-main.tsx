@@ -5,7 +5,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Link } from "react-router"
+import { cn } from "@/lib/utils"
+import { Link, useLocation } from "react-router"
 
 export function NavMain({
   items,
@@ -16,13 +17,23 @@ export function NavMain({
     icon?: React.ReactNode
   }[]
 }) {
+  const { pathname } = useLocation()
+
   return (
     <SidebarGroup>
-      <SidebarGroupContent className="flex flex-col gap-2">
-        <SidebarMenu>
+      <SidebarGroupContent>
+        <SidebarMenu className="space-y-2">
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton className="py-6" asChild>
+              <SidebarMenuButton
+                className={cn(
+                  "py-6",
+                  pathname === item.url
+                    ? "bg-border text-sidebar-accent-foreground dark:bg-sidebar-accent"
+                    : ""
+                )}
+                asChild
+              >
                 <Link to={item.url}>
                   {item.icon}
                   <span>{item.title}</span>
