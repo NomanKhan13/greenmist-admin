@@ -92,6 +92,223 @@ Adds domain realism without too much complexity
 
 ---
 
-TODO:
+# EPIC #1 — Room Management
+
+### Remaining
+
+- Search
+- Property filter
+- Status filter
+- Sort dropdown
+- Wire everything together
+- Final polish
+
+### Estimate
+
+**1–3 working days**
+
+My realistic estimate:
+
+**2 days**
+
+---
+
+# EPIC #2 — Reservation Management
+
+### Reservation List
+
+- Adapt Shadcn table
+- Integrate data
+
+### Search
+
+- Guest name
+- Booking ID
+
+### Filters
+
+- Status
+- Property
+
+### Sort
+
+- Check-in
+- Recently created
+
+### Reservation Details
+
+### Create Reservation
+
+### Edit Reservation
+
+### Check-in / Check-out
+
+### Cancel Reservation
+
+### Estimate
+
+**5–8 working days**
+
+My realistic estimate:
+
+**6–7 days**
+
+This is now clearly your largest epic.
+
+---
+
+# EPIC #3 — Dashboard
+
+### Stats cards
+
+### Occupancy
+
+### Revenue
+
+### Reservation summaries
+
+### Charts (Shadcn)
+
+### RPC aggregations
+
+### Estimate
+
+**2–3 working days**
+
+My realistic estimate:
+
+**2.5 days**
+
+---
+
+# EPIC #4 — Housekeeping
+
+### Table/List
+
+### Status filters
+
+### Priority filters
+
+### Search room number (optional but useful)
+
+### Update status actions
+
+### Estimate
+
+**1.5–3 working days**
+
+My realistic estimate:
+
+**2 days**
+
+---
+
+# EPIC #5 — Hotel Settings
+
+### Hotel information
+
+### Contact information
+
+### Tax/Currency settings
+
+### Save functionality
+
+### Estimate
+
+**0.5–1.5 days**
+
+My realistic estimate:
+
+**1 day**
+
+---
+
+# EPIC #6 — Add Staff
+
+### Staff list
+
+### Add staff form
+
+### Role selection
+
+### Estimate
+
+**0.5–1.5 days**
+
+My realistic estimate:
+
+**1 day**
+
+---
+
+# EPIC #7 — User Profile
+
+### Update profile
+
+### Change password UI
+
+### Estimate
+
+**0.5–1 day**
+
+My realistic estimate:
+
+**0.5 day**
+
+---
+
+# Updated Total
+
+| Epic                   | Realistic Days |
+| ---------------------- | -------------- |
+| Room Management        | 2              |
+| Reservation Management | 6–7            |
+| Dashboard              | 2.5            |
+| Housekeeping           | 2              |
+| Hotel Settings         | 1              |
+| Add Staff              | 1              |
+| User Profile           | 0.5            |
+
+**Total realistic estimate: ~15–16 working days**
+
+---
+
+# What I'd plan
+
+### Next 2 Weeks (10 working days)
+
+Target:
+
+- Finish Room Management (2 days)
+- Finish Reservation Management (6–7 days)
+
+This leaves:
+
+- 1–2 buffer days
+
+which is healthy.
+
+---
+
+### Week 3
+
+- Dashboard
+- Housekeeping
+
+---
+
+### Week 4
+
+- Hotel Settings
+- Add Staff
+- User Profile
+- Bug fixing
+- Final polish
+- Screenshots
+- Resume updates
+
+If your new accountability system actually sticks, I think **15–20 working days** is a reasonable expectation for the remaining work. The critical path is no longer Room Management—it's Reservations. That's where most of your development effort should go.
+
+## TODO:
 
 - [ ] Add ZOD validation for all forms.

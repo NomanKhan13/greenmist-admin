@@ -9,7 +9,7 @@ export async function getRoomTypes() {
   const { data: roomTypes, error } = await supabase
     .from("roomType")
     .select(
-      "id, name, thumbnail, pricePerNight, description, size, bedCount, bedType, maxAdults, maxKids, totalRooms, slug, idealFor, amenities, isActive, roomCode, properties(id)"
+      "id, name, thumbnail, pricePerNight, description, size, bedCount, bedType, maxAdults, maxKids, totalRooms, slug, idealFor, amenities, isActive, roomCode, category, properties(id, slug)"
     )
 
   if (error) {

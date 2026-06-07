@@ -3,6 +3,8 @@ import { RoomTypeActions } from "./room-type-actions"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { useSidebar } from "@/components/ui/sidebar"
+import { Badge } from "@/components/ui/badge"
 
 export type RoomTypeProps = {
   id: string
@@ -28,6 +30,7 @@ export type RoomTypeProps = {
       }
   isActive: boolean
   roomCode: string
+  category: string
 }
 
 export const formatToINR = (amount: number) => {
@@ -46,8 +49,8 @@ export default function RoomTypeCard({
   const [showDescription, setShowDescription] = useState(false)
 
   return (
-    <article className="group flex flex-col gap-6 rounded-lg border border-border/40 bg-sidebar p-4 shadow transition-all hover:shadow-md sm:p-6 md:flex-row dark:bg-card/80 dark:hover:bg-card">
-      <div className="relative aspect-video w-full shrink-0 overflow-hidden rounded-lg md:aspect-4/3 md:w-64">
+    <article className="group flex flex-col gap-6 rounded-lg border border-border/40 bg-sidebar p-4 shadow transition-all hover:shadow-md sm:p-6 @4xl:flex-row dark:bg-card/80 dark:hover:bg-card">
+      <div className="relative aspect-video w-full shrink-0 overflow-hidden rounded-lg @4xl:aspect-4/3 @4xl:w-64">
         <img
           // src={`https://proxy.corsfix.com/?${roomDetails.thumbnail}`} replace when pushing to prod
           src={roomDetails.thumbnail}
@@ -62,9 +65,17 @@ export default function RoomTypeCard({
         <div>
           <header className="flex items-start justify-between gap-4">
             <div className="flex flex-1 flex-col gap-1.5">
-              <h3 className="text-xl font-medium tracking-tight sm:text-2xl">
-                {roomDetails.name}
-              </h3>
+              <div className="flex items-center gap-2">
+                <h3 className="text-xl font-medium tracking-tight sm:text-2xl">
+                  {roomDetails.name}
+                </h3>
+                <Badge
+                  variant="outline"
+                  className="h-5 border-chart-2 bg-transparent px-2 text-[10px] text-chart-2"
+                >
+                  {roomDetails.category}
+                </Badge>
+              </div>
 
               {/* Mobile Pricing */}
               <div className="flex items-baseline gap-1 md:hidden">

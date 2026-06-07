@@ -12,20 +12,19 @@ import type { PropertyProps } from "@/pages/rooms"
 import { useState } from "react"
 import type { RoomTypeProps } from "./room-type-card"
 import RoomForm from "./room-form"
+import { toast } from "sonner"
 
 export function AddRoomSheet({
   propertyDropDown,
-  toaster,
 }: {
   propertyDropDown: Pick<PropertyProps, "name" | "id">[] | undefined
   defaultRoomData?: RoomTypeProps
-  toaster: (type: "success" | "error" | "warning", message: string) => void
 }) {
   const [open, setOpen] = useState(false)
 
   function onSuccess() {
     setOpen(false)
-    toaster("success", "Room type created successfully.")
+    toast.success("Room type created successfully.")
   }
 
   return (

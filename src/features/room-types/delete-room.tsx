@@ -15,11 +15,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import type { RoomTypeProps } from "./room-type-card"
 import { useSearchParams } from "react-router"
 import { deleteRoomType } from "@/lib/rooms-api"
-export function AlertDialogDestructive({
-  toaster,
-}: {
-  toaster: (type: "success" | "error" | "warning", message: string) => void
-}) {
+import { toast } from "sonner"
+import { CONFLICTING_URL_PARAMS } from "@/pages/rooms"
+export function AlertDialogDestructive({ isOpen }: { isOpen: boolean }) {
   const [searchParams, setSearchParams] = useSearchParams()
   const queryClient = useQueryClient()
 
@@ -29,7 +27,7 @@ export function AlertDialogDestructive({
 
   async function onSuccess() {
     const newParams = new URLSearchParams()
-    newParams.delete("delete")
+    CONFLICTING_URL_PARAMS.forEach((param) => newParams.delete(param))
     setSearchParams(newParams)
     await queryClient.invalidateQueries({ queryKey: ["room-types"] })
   }
@@ -42,16 +40,16 @@ export function AlertDialogDestructive({
     mutationFn: (roomId: string) => deleteRoomType(roomId),
     onSuccess: () => {
       onSuccess()
-      toaster("success", "Room type deleted successfully.")
+      toast.success("Room type deleted successfully.")
     },
     onError: (error) => {
       console.log("Error deleting room type", error)
-      toaster("error", "Failed to delete the room type. Please try again.")
+      toast.error("Failed to delete the room type. Please try again.")
     },
   })
 
   return (
-    <AlertDialog open={!!roomSlug} onOpenChange={handleOpenChange}>
+    <AlertDialog open={isOpen} onOpenChange={handleOpenChange}>
       <AlertDialogContent size="sm">
         <AlertDialogHeader>
           <AlertDialogMedia className="bg-destructive/10 text-destructive dark:bg-destructive/20 dark:text-destructive">
