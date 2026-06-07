@@ -10,7 +10,7 @@ import { CopyPlus, Eye, MoreVertical, Pencil, Trash2 } from "lucide-react"
 import { useSearchParams } from "react-router"
 
 export function RoomTypeActions({ roomCode }: { roomCode: string }) {
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [, setSearchParams] = useSearchParams()
 
   function handleSearchParams(
     type: "details" | "edit" | "duplicate" | "delete",
