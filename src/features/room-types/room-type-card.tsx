@@ -3,7 +3,6 @@ import { RoomTypeActions } from "./room-type-actions"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { useSidebar } from "@/components/ui/sidebar"
 import { Badge } from "@/components/ui/badge"
 
 export type RoomTypeProps = {
