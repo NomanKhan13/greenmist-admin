@@ -58,23 +58,22 @@ export default function RoomTypeCard({
           crossOrigin="anonymous"
         />
         <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+        <Badge
+          // variant="secondary"
+          className="absolute top-2 left-2 z-10 h-5 px-2 text-[10px] shadow"
+        >
+          {roomDetails.category}
+        </Badge>
       </div>
 
       <div className="flex flex-1 flex-col justify-between">
         <div>
           <header className="flex items-start justify-between gap-4">
             <div className="flex flex-1 flex-col gap-1.5">
-              <div className="flex items-center gap-2">
-                <h3 className="text-xl font-medium tracking-tight sm:text-2xl">
-                  {roomDetails.name}
-                </h3>
-                <Badge
-                  variant="outline"
-                  className="h-5 border-chart-2 bg-transparent px-2 text-[10px] text-chart-2"
-                >
-                  {roomDetails.category}
-                </Badge>
-              </div>
+              <h3 className="text-xl font-medium tracking-tight sm:text-2xl">
+                {roomDetails.name}
+              </h3>
 
               {/* Mobile Pricing */}
               <div className="flex items-baseline gap-1 md:hidden">

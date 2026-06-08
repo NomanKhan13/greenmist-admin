@@ -1,6 +1,10 @@
 import { useMemo } from "react"
 import { QueryClient, useQuery } from "@tanstack/react-query"
-import { useSearchParams, type ActionFunctionArgs } from "react-router"
+import {
+  useNavigation,
+  useSearchParams,
+  type ActionFunctionArgs,
+} from "react-router"
 
 import {
   propertiesQueryOptions,
@@ -36,7 +40,7 @@ export type PropertyProps = {
 
 function NoRoomTypes({ onRefresh }: { onRefresh: () => void }) {
   return (
-    <div className="flex min-h-100 flex-col items-center justify-center rounded-xl border border-dashed border-border/30 bg-muted/10 px-6 py-12 transition-all">
+    <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border/30 bg-muted/10 px-6 py-12 transition-all">
       <div className="text-center">
         <h3 className="text-lg font-medium tracking-tight text-foreground">
           No rooms found
@@ -69,25 +73,28 @@ export const PROPERTY_FILTERS = [
 ] as const
 
 export const CATEGORIES = [
-  "all",
+  "All",
   "Standard",
   "Deluxe",
   "Suite",
   "Villa",
 ] as const
 
-export const STATUS = ["all", "active", "inactive"] as const
+export const STATUS = ["All", "active", "inactive"] as const
 
 export const SORT_OPTIONS = [
-  "Default",
-  "name-asc",
-  "name-desc",
-  "price-asc",
-  "price-desc",
-  "capacity",
+  { name: "Default", value: "default" },
+  { name: "Name (A - Z)", value: "name-asc" },
+  { name: "Name (Z - A)", value: "name-desc" },
+  { name: "Price (Low to High)", value: "price-asc" },
+  { name: "Price (High to Low)", value: "price-desc" },
+  { name: "Capacity", value: "capacity" },
 ] as const
 
 export default function Rooms() {
+  const navigation = useNavigation()
+  const isLoading = navigation.state === "loading"
+
   const [searchParams, setSearchParams] = useSearchParams()
   const currentPropertyId =
     PROPERTY_FILTERS.find((prop) => prop === searchParams.get("property")) ||
@@ -100,8 +107,8 @@ export default function Rooms() {
   const statusFilter =
     STATUS.find((status) => status === searchParams.get("status")) || STATUS[0]
   const sortOption =
-    SORT_OPTIONS.find((sort) => sort === searchParams.get("sort")) ||
-    SORT_OPTIONS[0]
+    SORT_OPTIONS.find((sort) => sort.value === searchParams.get("sort"))
+      ?.value || SORT_OPTIONS[0].value
 
   const { data: roomTypes } = useQuery(roomsQueryOptions())
   const { data: properties } = useQuery(propertiesQueryOptions())

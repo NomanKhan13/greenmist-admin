@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { Moon } from "lucide-react" // Make sure to import an icon for the toggle
 
 import {
   SidebarGroup,
@@ -10,6 +11,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { Link } from "react-router"
+import { cn } from "@/lib/utils"
 
 export function NavSecondary({
   items,
@@ -24,17 +26,30 @@ export function NavSecondary({
   return (
     <SidebarGroup {...props}>
       <SidebarGroupContent>
-        <SidebarMenu>
+        <SidebarMenu className="space-y-2">
           <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <div className="font-mono text-xs text-muted-foreground">
-                (Press <kbd>d</kbd> to toggle dark mode)
-              </div>
+            <SidebarMenuButton
+              asChild
+              tooltip="Toggle dark mode"
+              className="h-12"
+            >
+              <button type="button" className="w-full text-left">
+                <Moon />
+                <span className="font-mono text-xs text-muted-foreground">
+                  (Press{" "}
+                  <kbd className="rounded border bg-muted/50 px-1 font-sans">
+                    {" "}
+                    d
+                  </kbd>{" "}
+                  to toggle)
+                </span>
+              </button>
             </SidebarMenuButton>
           </SidebarMenuItem>
+
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton className="py-6" asChild>
+              <SidebarMenuButton className="h-12" asChild tooltip={item.title}>
                 <Link to={item.url}>
                   {item.icon}
                   <span>{item.title}</span>

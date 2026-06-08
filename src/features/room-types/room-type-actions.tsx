@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { CopyPlus, Eye, MoreVertical, Pencil, Trash2 } from "lucide-react"
 import { useSearchParams } from "react-router"
+import roomDetails from "./room-details"
 
 export function RoomTypeActions({ roomCode }: { roomCode: string }) {
   const [, setSearchParams] = useSearchParams()
@@ -26,7 +27,7 @@ export function RoomTypeActions({ roomCode }: { roomCode: string }) {
     })
   }
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
@@ -37,30 +38,42 @@ export function RoomTypeActions({ roomCode }: { roomCode: string }) {
           <MoreVertical className="h-5 w-5" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-2">
+      <DropdownMenuContent className="p-2" side="left" align="end">
         <DropdownMenuGroup className="space-y-1">
           <DropdownMenuItem
             className="py-2"
-            onClick={() => handleSearchParams("details", roomCode)}
+            onSelect={(e) => {
+              e.preventDefault()
+              handleSearchParams("details", roomCode)
+            }}
           >
             <Eye /> View
           </DropdownMenuItem>
           <DropdownMenuItem
             className="py-2"
-            onClick={() => handleSearchParams("edit", roomCode)}
+            onSelect={(e) => {
+              e.preventDefault()
+              handleSearchParams("edit", roomCode)
+            }}
           >
             <Pencil /> Update
           </DropdownMenuItem>
           <DropdownMenuItem
             className="py-2"
-            onClick={() => handleSearchParams("duplicate", roomCode)}
+            onSelect={(e) => {
+              e.preventDefault()
+              handleSearchParams("duplicate", roomCode)
+            }}
           >
             <CopyPlus />
             Duplicate
           </DropdownMenuItem>
           <DropdownMenuItem
             className="py-2"
-            onClick={() => handleSearchParams("delete", roomCode)}
+            onSelect={(e) => {
+              e.preventDefault()
+              handleSearchParams("delete", roomCode)
+            }}
           >
             <Trash2 /> Delete
           </DropdownMenuItem>

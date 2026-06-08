@@ -4,8 +4,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar"
-import { cn } from "@/lib/utils"
+import { useEffect } from "react"
 import { Link, useLocation } from "react-router"
 
 export function NavMain({
@@ -18,6 +19,7 @@ export function NavMain({
   }[]
 }) {
   const { pathname } = useLocation()
+  const { setOpenMobile, isMobile } = useSidebar()
 
   return (
     <SidebarGroup>
@@ -26,15 +28,15 @@ export function NavMain({
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton
-                className={cn(
-                  "py-6",
-                  pathname === item.url
-                    ? "bg-border text-sidebar-accent-foreground dark:bg-sidebar-accent"
-                    : ""
-                )}
+                isActive={pathname === item.url}
+                tooltip={item.title}
+                className="h-12"
                 asChild
               >
-                <Link to={item.url}>
+                <Link
+                  to={item.url}
+                  onClick={() => isMobile && setOpenMobile(false)}
+                >
                   {item.icon}
                   <span>{item.title}</span>
                 </Link>

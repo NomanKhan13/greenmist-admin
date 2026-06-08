@@ -28,14 +28,15 @@ export default function ControlBar() {
     CATEGORIES.find((cat) => cat === searchParams.get("category")) || ""
   const status = STATUS.find((s) => s === searchParams.get("status")) || ""
   const sort =
-    SORT_OPTIONS.find((sort) => sort === searchParams.get("sort")) || ""
+    SORT_OPTIONS.find((sort) => sort.value === searchParams.get("sort"))
+      ?.value || ""
   console.log("Value of category when params cleared", category)
 
   function updateControls(type: "category" | "status" | "sort", value: string) {
     setSearchParams(
       (prev) => {
         const newParams = new URLSearchParams(prev)
-        if (!value || value === "all" || value === "Default")
+        if (!value || value === "All" || value === "default")
           newParams.delete(type)
         else newParams.set(type, value)
         return newParams
@@ -137,7 +138,7 @@ export default function ControlBar() {
 
               {CATEGORIES.map((cat, idx) => (
                 <SelectItem key={`${cat}-${idx}`} value={cat}>
-                  {cat === "all" ? "All Categories" : cat}
+                  {cat === "All" ? "All Categories" : cat}
                 </SelectItem>
               ))}
             </SelectGroup>
@@ -148,7 +149,7 @@ export default function ControlBar() {
           value={status}
           onValueChange={(newValue) => updateControls("status", newValue)}
         >
-          <SelectTrigger className="h-9 w-34 shrink-0 bg-muted/10 text-xs shadow-none">
+          <SelectTrigger className="h-9 w-34 shrink-0 bg-muted/10 text-xs capitalize shadow-none">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
           <SelectContent>
@@ -156,8 +157,12 @@ export default function ControlBar() {
               <SelectLabel>Status</SelectLabel>
 
               {STATUS.map((status, idx) => (
-                <SelectItem key={`${status}-${idx}`} value={status}>
-                  {status === "all" ? "All Statuses" : status}
+                <SelectItem
+                  key={`${status}-${idx}`}
+                  value={status}
+                  className="capitalize"
+                >
+                  {status === "All" ? "All Statuses" : status}
                 </SelectItem>
               ))}
             </SelectGroup>
@@ -181,8 +186,8 @@ export default function ControlBar() {
               <SelectLabel>Sort</SelectLabel>
 
               {SORT_OPTIONS.map((option, idx) => (
-                <SelectItem key={`${option}-${idx}`} value={option}>
-                  {option === "Default" ? "Default" : option}
+                <SelectItem key={`${option.value}-${idx}`} value={option.value}>
+                  {option.name}
                 </SelectItem>
               ))}
             </SelectGroup>

@@ -22,6 +22,7 @@ import {
 import { CONFLICTING_URL_PARAMS } from "@/pages/rooms"
 import type { RoomTypeProps } from "./room-type-card"
 import { cn } from "@/lib/utils"
+import { useRef } from "react"
 
 const inrFormatter = new Intl.NumberFormat("en-IN", {
   style: "currency",
@@ -56,8 +57,12 @@ export default function RoomDetailsSheet({ isOpen }: { isOpen: boolean }) {
   const roomCode = searchParams.get("details")
 
   const cachedRooms = queryClient.getQueryData<RoomTypeProps[]>(["room-types"])
-  const room = cachedRooms?.find((r) => r.roomCode === roomCode)
+  const currentRoom = cachedRooms?.find((r) => r.roomCode === roomCode)
 
+  const prevRoomRef = useRef<RoomTypeProps | undefined>(undefined)
+  if (currentRoom) prevRoomRef.current = currentRoom
+
+  const room = currentRoom || prevRoomRef.current
   const roomDoesNotExist = isOpen && !room
 
   function closeSheet() {
@@ -74,7 +79,9 @@ export default function RoomDetailsSheet({ isOpen }: { isOpen: boolean }) {
     <Sheet open={isOpen} onOpenChange={handleOpenChange}>
       <SheetContent className="overflow-y-auto p-4 sm:p-6 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/50 hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/80 [&::-webkit-scrollbar-track]:bg-muted">
         <SheetHeader
-          className={cn(roomDoesNotExist ? "sr-only" : "mb-6 p-0 text-left")}
+          className={cn(
+            roomDoesNotExist ? "sr-only" : "mb-4 p-0 pt-8 text-left"
+          )}
         >
           <SheetTitle className="text-2xl font-semibold tracking-tight">
             {room?.name || "Room Not Found"}
