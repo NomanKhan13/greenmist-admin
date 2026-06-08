@@ -6,7 +6,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { useEffect } from "react"
 import { Link, useLocation } from "react-router"
 
 export function NavMain({

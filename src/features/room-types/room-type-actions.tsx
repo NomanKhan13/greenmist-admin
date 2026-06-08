@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { CopyPlus, Eye, MoreVertical, Pencil, Trash2 } from "lucide-react"
 import { useSearchParams } from "react-router"
-import roomDetails from "./room-details"
 
 export function RoomTypeActions({ roomCode }: { roomCode: string }) {
   const [, setSearchParams] = useSearchParams()
