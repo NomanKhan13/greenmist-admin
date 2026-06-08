@@ -1,10 +1,6 @@
 import { useMemo } from "react"
 import { QueryClient, useQuery } from "@tanstack/react-query"
-import {
-  useNavigation,
-  useSearchParams,
-  type ActionFunctionArgs,
-} from "react-router"
+import { useSearchParams, type ActionFunctionArgs } from "react-router"
 
 import {
   propertiesQueryOptions,
@@ -92,8 +88,8 @@ export const SORT_OPTIONS = [
 ] as const
 
 export default function Rooms() {
-  const navigation = useNavigation()
-  const isLoading = navigation.state === "loading"
+  // const navigation = useNavigation()
+  // const isLoading = navigation.state === "loading"
 
   const [searchParams, setSearchParams] = useSearchParams()
   const currentPropertyId =
