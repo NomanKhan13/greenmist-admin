@@ -24,7 +24,7 @@ import type { RoomTypeProps } from "./room-type-card"
 import { cn } from "@/lib/utils"
 import { useRef } from "react"
 
-const inrFormatter = new Intl.NumberFormat("en-IN", {
+export const inrFormatter = new Intl.NumberFormat("en-IN", {
   style: "currency",
   currency: "INR",
   minimumFractionDigits: 0,

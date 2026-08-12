@@ -7,9 +7,11 @@ import {
   roomsQueryOptions,
 } from "@/hooks/queries/rooms-query-options"
 import { addNewRoomType, updateRoomType } from "@/lib/rooms-api"
-import { RoomTypeSchema } from "@/lib/utils"
 import { AddRoomSheet } from "@/features/room-types/add-room-sheet"
 import { AlertDialogDestructive } from "@/features/room-types/delete-room"
+import { Button } from "@/components/ui/button"
+import { RefreshCcw } from "lucide-react"
+
 import DuplicateRoomSheet from "@/features/room-types/duplicate-room-sheet"
 import EditRoomSheet from "@/features/room-types/edit-room-sheet"
 import RoomDetailsSheet from "@/features/room-types/room-details"
@@ -18,9 +20,8 @@ import RoomTypeCard, {
 } from "@/features/room-types/room-type-card"
 import PropertyFilterTabs from "@/features/room-types/property-filter-tabs"
 import ControlBar from "@/features/room-types/controlbar"
-import { Button } from "@/components/ui/button"
-import { RefreshCcw } from "lucide-react"
-
+import PageHeader from "@/ui/page-header"
+import { RoomTypeSchema } from "@/features/room-types/room-schema"
 export type PropertyProps = {
   id: string
   name: string
@@ -192,13 +193,10 @@ export default function Rooms() {
       <header className="mb-6 flex flex-col gap-5 border-b border-border/75 pb-6">
         <div className="mb-6 flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
           <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-              Rooms Inventory
-            </h2>
-            <p className="mt-1.5 text-sm text-muted-foreground">
-              Manage room specifications, capacity, and pricing across
-              properties.
-            </p>
+            <PageHeader
+              title="Rooms Inventory"
+              description="Manage room specifications, capacity, and pricing across properties."
+            />
           </div>
           <AddRoomSheet propertyDropDown={propertyDropDown} />
         </div>

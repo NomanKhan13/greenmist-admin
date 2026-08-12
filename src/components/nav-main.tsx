@@ -18,6 +18,7 @@ export function NavMain({
   }[]
 }) {
   const { pathname } = useLocation()
+  console.log("pathname", pathname.split("/")[1])
   const { setOpenMobile, isMobile } = useSidebar()
 
   return (
@@ -27,7 +28,7 @@ export function NavMain({
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton
-                isActive={pathname === item.url}
+                isActive={pathname.split("/")[1] === item.url.replace("/", "")}
                 tooltip={item.title}
                 className="h-12"
                 asChild

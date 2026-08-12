@@ -11,10 +11,11 @@ import Rooms, {
 import { getUserData } from "./lib/auth-api"
 import GlobalError from "./ui/global-error"
 import { loginAction } from "./components/login-form"
-import Reservations from "./pages/reservations"
+import Reservations, { loader as reservationLoader } from "./pages/reservations"
 import Housekeeping from "./pages/house-keeping"
 import Settings from "./pages/settings"
 import LoadingScreen from "./ui/loading-screen"
+import CreateReservationPage from "./features/reservations/add-reservation"
 
 export async function requiresAuth() {
   const isAuthenticated = await getUserData()
@@ -70,7 +71,18 @@ const router = createBrowserRouter([
       },
       {
         path: "reservations",
-        Component: Reservations,
+        loader: () => reservationLoader(queryClient),
+        // Component: Reservations,
+        children: [
+          {
+            index: true,
+            Component: Reservations,
+          },
+          {
+            path: "new",
+            Component: CreateReservationPage,
+          },
+        ],
       },
       {
         path: "house-keeping",

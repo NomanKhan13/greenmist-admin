@@ -1,3 +1,4 @@
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
 import { PROPERTY_FILTERS, type PropertyProps } from "@/pages/rooms"
 import { useEffect } from "react"
@@ -32,38 +33,42 @@ export default function PropertyFilterTabs({
   }, [currentPropertyId])
 
   return (
-    <div className="flex w-full">
-      <div
-        className="inline-flex w-full items-center gap-1 overflow-x-auto rounded-lg bg-muted/20 p-1 @md:w-auto [&::-webkit-scrollbar]:hidden"
-        style={{ scrollbarWidth: "none" }}
-      >
-        <button
-          onClick={() => handlePropertyClick("all")}
+    <Tabs
+      defaultValue="all"
+      className="flex w-full"
+      value={currentPropertyId}
+      onValueChange={(newValue) => {
+        handlePropertyClick(newValue)
+      }}
+    >
+      <TabsList className="inline-flex w-full items-center justify-start overflow-x-auto rounded-lg bg-muted/30 p-1 md:w-max [&::-webkit-scrollbar]:hidden">
+        <TabsTrigger
           className={cn(
-            "relative shrink-0 rounded-md px-4 py-2 text-xs font-medium transition-all duration-300 ease-out",
-            currentPropertyId === "all"
-              ? "bg-background text-foreground shadow-sm ring-1 ring-border/75"
-              : "text-muted-foreground hover:bg-muted/30 hover:text-foreground"
+            "shrink-0 rounded-md px-4 py-1.5 text-xs font-medium transition-all",
+            "text-muted-foreground hover:text-foreground",
+            "data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
           )}
+          value="all"
         >
           All Properties
-        </button>
+        </TabsTrigger>
 
-        {properties?.map((property: PropertyProps) => (
-          <button
+        {/* Apply the exact same className to your mapped properties! */}
+
+        {properties.map((property) => (
+          <TabsTrigger
             key={property.id}
-            onClick={() => handlePropertyClick(property.slug)}
             className={cn(
-              "relative shrink-0 rounded-md px-4 py-2 text-xs font-medium capitalize transition-all duration-300 ease-out",
-              currentPropertyId === property.slug
-                ? "bg-background text-foreground shadow-sm ring-1 ring-border/75"
-                : "text-muted-foreground hover:bg-muted/30 hover:text-foreground"
+              "shrink-0 rounded-md px-3 py-1.5 text-xs font-medium transition-all",
+              "text-muted-foreground hover:bg-muted/20 hover:text-foreground",
+              "data-[state=active]:bg-muted/40 data-[state=active]:text-foreground data-[state=active]:shadow-none"
             )}
+            value={property.slug}
           >
             {property.name}
-          </button>
+          </TabsTrigger>
         ))}
-      </div>
-    </div>
+      </TabsList>
+    </Tabs>
   )
 }

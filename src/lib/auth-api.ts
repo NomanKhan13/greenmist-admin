@@ -1,4 +1,4 @@
-import { supabase } from "./supabse"
+import { supabase } from "./supabase"
 
 export async function getUserData() {
   /**

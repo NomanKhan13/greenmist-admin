@@ -1,4 +1,4 @@
-import { supabase } from "./supabse"
+import { supabase } from "./supabase"
 
 export async function getProperties() {
   const { data: properties, error } = await supabase

@@ -1,9 +1,33 @@
-import { supabase } from "./supabse"
+import { supabase } from "./supabase"
 import {
   generateRoomCode,
   getFriendlyErrorMessage,
   type RoomType,
 } from "./utils"
+
+type FetchedRoomTypes = {
+  id: any
+  name: any
+  thumbnail: any
+  pricePerNight: any
+  description: any
+  size: any
+  bedCount: any
+  bedType: any
+  maxAdults: any
+  maxKids: any
+  totalRooms: any
+  slug: any
+  idealFor: any
+  amenities: any
+  isActive: any
+  roomCode: any
+  category: any
+  properties: {
+    id: any
+    slug: any
+  }
+}
 
 export async function getRoomTypes() {
   const { data: roomTypes, error } = await supabase
@@ -11,6 +35,23 @@ export async function getRoomTypes() {
     .select(
       "id, name, thumbnail, pricePerNight, description, size, bedCount, bedType, maxAdults, maxKids, totalRooms, slug, idealFor, amenities, isActive, roomCode, category, properties(id, slug)"
     )
+    .overrideTypes<FetchedRoomTypes[]>()
+
+  if (error) {
+    console.log("Error", error)
+    throw new Error("Facing error while fetching room types...")
+  }
+
+  return roomTypes
+}
+
+export async function getRoomTypeByProperty(property: string) {
+  const { data: roomTypes, error } = await supabase
+    .from("roomType")
+    .select(
+      "id, name, thumbnail, pricePerNight, description, size, bedCount, bedType, maxAdults, maxKids, totalRooms, slug, idealFor, amenities, isActive, roomCode, category"
+    )
+    .eq("properties.slug", property)
 
   if (error) {
     console.log("Error", error)

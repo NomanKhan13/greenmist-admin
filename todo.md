@@ -312,3 +312,9 @@ If your new accountability system actually sticks, I think **15–20 working day
 ## TODO:
 
 - [ ] Add ZOD validation for all forms.
+
+# Reservation EPIC todos.
+
+1. Guest selector working proerly in Create Reservation
+2. Availability check properly working in Create Reservation
+3. Wire up reservation form and reservation preview components.

@@ -16,7 +16,7 @@ import {
   useNavigation,
   type ActionFunctionArgs,
 } from "react-router"
-import { supabase } from "@/lib/supabse"
+import { supabase } from "@/lib/supabase"
 
 export function LoginForm({
   className,
@@ -71,6 +71,14 @@ export function LoginForm({
             </FieldGroup>
           </Form>
         </CardContent>
+        {/* add demo credentials */}
+        <div className="px-6 text-sm">
+          <p className="mb-2 font-medium">Demo Credentials:</p>
+          <p className="mb-1 text-muted-foreground">
+            Email: testuser123@gmail.com
+          </p>
+          <p className="text-muted-foreground">Password: Admin123</p>
+        </div>
       </Card>
 
       <div className="h-16">
