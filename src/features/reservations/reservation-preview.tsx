@@ -15,7 +15,6 @@ import { useFormContext, useWatch } from "react-hook-form"
 import { reservationPriceCalculation } from "./reservation-pricing"
 import type { ReservationFormValues } from "./reservation-schema"
 import { inrFormatter } from "../room-types/room-details"
-import { useMemo } from "react"
 import { distributeGuestsInRoom } from "./reservation-form"
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_IMG_URL

@@ -1,7 +1,7 @@
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { useLocation } from "react-router"
-import { data } from "./app-sidebar"
+
 import {
   Breadcrumb,
   BreadcrumbItem,

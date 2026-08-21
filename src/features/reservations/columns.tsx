@@ -1,5 +1,4 @@
 import { differenceInDays, format } from "date-fns"
-import { Badge } from "@/components/ui/badge"
 import type { ColumnDef } from "@tanstack/react-table"
 import {
   DropdownMenu,
@@ -231,6 +230,7 @@ export const columns: ColumnDef<ReservationProp>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
+      console.log(row)
       return (
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>

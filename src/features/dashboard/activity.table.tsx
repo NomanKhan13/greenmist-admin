@@ -4,8 +4,6 @@ import {
   ArrowDownLeft,
   ArrowUpRight,
   MoreHorizontal,
-  CheckCircle2,
-  CircleDashed,
   LogOut,
   LogIn,
 } from "lucide-react"

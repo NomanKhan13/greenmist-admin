@@ -38,7 +38,7 @@ export function DataTable<TData, TValue>({
   data,
   properties,
 }: DataTableProps<TData, TValue>) {
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   // const [sorting, setSorting] = useState<SortingState>([])
   const [rowSelection, setRowSelection] = useState({})
 

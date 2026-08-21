@@ -21,7 +21,7 @@ import { PropertySelect, RoomTypeSelect } from "./location-select"
 import GuestSelector from "./guest-selector"
 import { cn } from "@/lib/utils"
 import type z from "zod"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import {
   CalendarIcon,
   CircleCheckBig,
@@ -34,7 +34,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { differenceInCalendarDays, format, startOfDay } from "date-fns"
+import { format, startOfDay } from "date-fns"
 import { Calendar } from "@/components/ui/calendar"
 import {
   checkRoomAvailability,
@@ -99,6 +99,7 @@ export function ReservationForm({
     mutationFn: createReservation,
     onSuccess: (data, variables) => {
       // Internal staff-facing toast notification
+      console.log(data)
       toast.success("Reservation Logged Successfully", {
         classNames: {
           // 'self-start' forces just the icon to align to the top edge
@@ -169,7 +170,7 @@ export function ReservationForm({
     const mappedAddOns =
       addOns?.filter((addOn) => data.addOns?.includes(addOn.id)) || []
 
-    const { roomTotal, nights, taxAmount, grandTotal, addOnsTotal } =
+    const { roomTotal, nights, grandTotal, addOnsTotal } =
       reservationPriceCalculation(
         roomsReq || 0,
         room?.pricePerNight || 0,

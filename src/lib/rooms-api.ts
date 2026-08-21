@@ -1,9 +1,6 @@
+import type { RoomType } from "@/features/room-types/room-schema"
 import { supabase } from "./supabase"
-import {
-  generateRoomCode,
-  getFriendlyErrorMessage,
-  type RoomType,
-} from "./utils"
+import { generateRoomCode, getFriendlyErrorMessage } from "./utils"
 
 type FetchedRoomTypes = {
   id: any
