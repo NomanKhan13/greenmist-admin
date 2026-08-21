@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import { useState } from "react"
 import {
   Card,
   CardContent,
@@ -18,34 +18,12 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-  ChartLegend,
-  ChartLegendContent,
-} from "@/components/ui/chart"
-import { Pie, PieChart } from "recharts"
 
 import KpiCards from "@/features/dashboard/kpi-cards"
 import { RevenueOccupancyChart } from "@/features/dashboard/revenue-occupancy-chart"
 import { TodayArrivalsDepartures } from "@/features/dashboard/activity.table"
 import { RevenueByRoomChart } from "@/features/dashboard/revenue-by-room"
 import { RoomStatusChart } from "@/features/dashboard/room-status"
-
-// --- Shadcn Chart Configuration ---
-const chartConfig = {
-  occupied: { label: "Occupied", color: "var(--chart-1)" },
-  vacant: { label: "Vacant", color: "var(--chart-5)" },
-  maintenance: { label: "Maintenance", color: "var(--destructive)" },
-}
-
-// --- Local Mock Data ---
-const roomStatusData = [
-  { status: "occupied", count: 85, fill: "var(--color-occupied)" },
-  { status: "vacant", count: 22, fill: "var(--color-vacant)" },
-  { status: "maintenance", count: 5, fill: "var(--color-maintenance)" },
-]
 
 const todayTasksData = [
   { id: 1, title: "Inspect Penthouse suite", completed: false },
@@ -65,8 +43,7 @@ export default function HotelDashboard() {
   }
 
   return (
-    <div className="flex-1 space-y-8 overflow-y-auto bg-background p-6 md:p-8 lg:p-10 text-foreground">
-      
+    <div className="flex-1 space-y-8 overflow-y-auto bg-background p-6 text-foreground md:p-8 lg:p-10">
       {/* --- Header & Global Filters --- */}
       <div className="flex flex-col items-start justify-between gap-4 pb-2 md:flex-row md:items-center">
         <div>
@@ -84,8 +61,12 @@ export default function HotelDashboard() {
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Properties</SelectLabel>
-                <SelectItem value="hill-retreat">GreenMist Hill Retreat</SelectItem>
-                <SelectItem value="valley-retreat">GreenMist Valley Retreat</SelectItem>
+                <SelectItem value="hill-retreat">
+                  GreenMist Hill Retreat
+                </SelectItem>
+                <SelectItem value="valley-retreat">
+                  GreenMist Valley Retreat
+                </SelectItem>
                 <SelectItem value="tea-garden">GreenMist Tea Garden</SelectItem>
               </SelectGroup>
             </SelectContent>
@@ -118,7 +99,6 @@ export default function HotelDashboard() {
 
       {/* --- ROW 4: Bottom Widgets (3-Column Grid) --- */}
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-        
         {/* Column 1: Revenue by Room Type */}
         <RevenueByRoomChart />
 
@@ -126,7 +106,7 @@ export default function HotelDashboard() {
         <RoomStatusChart />
 
         {/* Column 3: Today's Tasks */}
-        <Card className="flex h-[325px] flex-col border-border bg-card shadow-sm lg:h-full">
+        <Card className="flex h-82 flex-col border-border bg-card shadow-sm lg:h-full">
           <CardHeader className="pb-4">
             <CardTitle>Today's Tasks</CardTitle>
             <CardDescription>Daily operational checklist</CardDescription>
@@ -159,7 +139,6 @@ export default function HotelDashboard() {
             </div>
           </CardContent>
         </Card>
-
       </div>
     </div>
   )
